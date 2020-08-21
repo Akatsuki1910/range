@@ -30,7 +30,7 @@
 	const value = +elm.getAttribute("data-value") || 50;
 	const minValue = kwidth / 2;
 	const maxValue = gwidth - minValue * 2;
-	knobElm.style.left = ((maxValue+minValue*2)*(value/(max-min))) + "px";
+	knobElm.style.left = ((maxValue + minValue * 2) * (value / (max - min))) + "px";
 	grooveBeforeElm.style.width = returnCssValue(kEl.left, "px") + "px";
 
 	//mouse over
@@ -100,7 +100,7 @@
 			grooveBeforeElm.style.width = returnCssValue(kEl.left, "px") + "px";
 
 			colorClick();
-			//値返却
+			//return value
 			console.log(returnValue());
 		}
 	}
@@ -115,31 +115,19 @@
 		knobLeft = returnCssValue(kEl.left, "px");
 		colorClickOut();
 	}
-}
 
-function returnValue() {
-	const elm = document.getElementById("range")
-	const min = +elm.getAttribute("data-min") || 0;
-	const max = +elm.getAttribute("data-max") || 100;
+	function returnValue() {
+		const gfwidth = returnCssValue(gfEl.width, "px");
+		return ((gfwidth - minValue) / maxValue) * (max - min) + min;
+	}
 
-	const kEl = returnElm(document.getElementById("rangeKnob"));
-	const kwidth = returnCssValue(kEl.width, "px");
-	const gEl = returnElm(document.getElementById("rangeGroove"));
-	const gwidth = returnCssValue(gEl.width, "px");
-	const minValue = kwidth / 2;
-	const maxValue = gwidth - minValue * 2;
+	function returnElm(element) {
+		return element.currentStyle || document.defaultView.getComputedStyle(element, '');
+	}
 
-	const gfEl = returnElm(document.getElementById("rangeGrooveBefore"));
-	const gfwidth = returnCssValue(gfEl.width, "px");
+	function returnCssValue(style, unit) {
+		const regexp = new RegExp(unit, 'g');
+		return +(style.replace(regexp, ""));
+	}
 
-	return ((gfwidth - minValue) / maxValue) * (max - min) + min;
-}
-
-function returnElm(element) {
-	return element.currentStyle || document.defaultView.getComputedStyle(element, '');
-}
-
-function returnCssValue(style, unit) {
-	const regexp = new RegExp(unit, 'g');
-	return +(style.replace(regexp, ""));
 }

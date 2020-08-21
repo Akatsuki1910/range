@@ -17,12 +17,16 @@
 	knobElm.setAttribute("class", "range-knob");
 	elm.appendChild(knobElm);
 
+	//def
 	const gEl = returnElm(document.getElementById("rangeGroove"));
 	let gwidth = returnCssValue(gEl.width, "px");
 	const gfEl = returnElm(document.getElementById("rangeGrooveBefore"));
 	let gfwidth = returnCssValue(gfEl.width, "px");
 	const kEl = returnElm(document.getElementById("rangeKnob"));
 	let kwidth = returnCssValue(kEl.width, "px");
+
+	//rotate
+	const rotateFlg = false;
 
 	//first value
 	const min = +elm.getAttribute("data-min") || 0;
@@ -77,11 +81,11 @@
 
 	//mouse click
 	let grooveClick = false;
-	let mouseXmem = 0;
+	let mousePosimem = 0;
 
 	knobElm.onmousedown = (e) => {
 		grooveClick = true;
-		mouseXmem = e.clientX;
+		mousePosimem = (rotateFlg)?e.clientY:e.clientX;
 		colorClick();
 	}
 
@@ -91,7 +95,8 @@
 	window.onmousemove = (e) => {
 		if (grooveClick) {
 			const kwidth = returnCssValue(kEl.width, "px");
-			knobElm.style.left = (knobLeft + (e.clientX - mouseXmem)) + "px";
+			const posi = (rotateFlg)?(-e.clientY + mousePosimem):(e.clientX - mousePosimem);
+			knobElm.style.left = (knobLeft + posi) + "px";
 			if (returnCssValue(kEl.left, "px") + kwidth / 2 > gwidth) {
 				knobElm.style.left = (gwidth - kwidth / 2) + "px";
 			} else if (returnCssValue(kEl.left, "px") < kwidth / 2) {

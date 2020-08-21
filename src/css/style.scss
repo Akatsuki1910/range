@@ -7,6 +7,8 @@ $knob-heigth:15.5px;
 	height:$knob-heigth;
 	width: $border-width;
 	position:relative;
+	// top:calc(#{$border-width});
+	// transform: rotate(-90deg);
 	.range-groove{
 		box-sizing: border-box;
 		width:$border-width;

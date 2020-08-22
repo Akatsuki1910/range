@@ -29,9 +29,9 @@
 	const rotateFlg = false;
 
 	//first value
-	const min = +elm.getAttribute("data-min") || 0;
-	const max = +elm.getAttribute("data-max") || 100;
-	const value = +elm.getAttribute("data-value") || 50;
+	const min = isNumber(+elm.getAttribute("data-min"), 0);
+	const max = isNumber(+elm.getAttribute("data-max"), 100);
+	const value = isNumber(+elm.getAttribute("data-value"), 50);
 	const minValue = kwidth / 2;
 	const maxValue = gwidth - minValue * 2;
 	knobElm.style.left = ((maxValue) * Math.min(1, (value / (max - min)))) + minValue + "px";
@@ -133,6 +133,17 @@
 	function returnCssValue(style, unit) {
 		const regexp = new RegExp(unit, 'g');
 		return +(style.replace(regexp, ""));
+	}
+
+	function isNumber(val, def) {
+		let returnValue;
+		var regexp = new RegExp(/^[+,-]?([1-9]\d*|0)(\.\d+)?$/);
+		if (regexp.test(val)) {
+			returnValue = val;
+		} else {
+			returnValue = def;
+		}
+		return returnValue;
 	}
 
 }

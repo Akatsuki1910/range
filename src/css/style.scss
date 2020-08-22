@@ -2,24 +2,26 @@ $border-heigth:8px;
 $border-width:129px;
 $knob-heigth:15.5px;
 
-#range{
-	margin:2px;
-	height:$knob-heigth;
+#range {
+	margin: 2px;
+	height: $knob-heigth;
 	width: $border-width;
-	position:relative;
+	position: relative;
+
 	// top:calc(#{$border-width});
 	// transform: rotate(-90deg);
-	.range-groove{
+	.range-groove {
 		box-sizing: border-box;
-		width:$border-width;
-		height:$border-heigth;
-		border-radius:$border-heigth;
-		background-color:rgb(239,239,239);
-		position:absolute;
-		top:50%;
-		transform:translateY(-50%);
+		width: $border-width;
+		height: $border-heigth;
+		border-radius: $border-heigth;
+		background-color: rgb(239, 239, 239);
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
 		border: 0.000005px solid rgb(178, 178, 178);
-		.range-groove-before{
+
+		.range-groove-before {
 			background-color: rgb(0, 117, 255);
 			width: calc(#{$border-width}/2);
 			height: $border-heigth;
@@ -28,14 +30,15 @@ $knob-heigth:15.5px;
 			border-bottom-left-radius: $border-heigth;
 		}
 	}
-	.range-knob{
-		width:$knob-heigth;
-		height:$knob-heigth;
-		border-radius:50%;
-		background-color:rgb(0, 117, 255);
-		position:absolute;
-		top:0;
+
+	.range-knob {
+		width: $knob-heigth;
+		height: $knob-heigth;
+		border-radius: 50%;
+		background-color: rgb(0, 117, 255);
+		position: absolute;
+		top: 0;
 		left: calc(#{$border-width}/2);
-		transform:translateX(-50%);
+		transform: translateX(-50%);
 	}
 }

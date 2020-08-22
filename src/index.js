@@ -34,7 +34,7 @@
 	const value = +elm.getAttribute("data-value") || 50;
 	const minValue = kwidth / 2;
 	const maxValue = gwidth - minValue * 2;
-	knobElm.style.left = ((maxValue + minValue * 2) * (value / (max - min))) + "px";
+	knobElm.style.left = ((maxValue) * Math.min(1, (value / (max - min)))) + minValue + "px";
 	grooveBeforeElm.style.width = returnCssValue(kEl.left, "px") + "px";
 
 	//mouse over
@@ -85,7 +85,7 @@
 
 	knobElm.onmousedown = (e) => {
 		grooveClick = true;
-		mousePosimem = (rotateFlg)?e.clientY:e.clientX;
+		mousePosimem = (rotateFlg) ? e.clientY : e.clientX;
 		colorClick();
 	}
 
@@ -95,7 +95,7 @@
 	window.onmousemove = (e) => {
 		if (grooveClick) {
 			const kwidth = returnCssValue(kEl.width, "px");
-			const posi = (rotateFlg)?(-e.clientY + mousePosimem):(e.clientX - mousePosimem);
+			const posi = (rotateFlg) ? (-e.clientY + mousePosimem) : (e.clientX - mousePosimem);
 			knobElm.style.left = (knobLeft + posi) + "px";
 			if (returnCssValue(kEl.left, "px") + kwidth / 2 > gwidth) {
 				knobElm.style.left = (gwidth - kwidth / 2) + "px";
@@ -106,7 +106,7 @@
 
 			colorClick();
 			//return value
-			console.log(returnValue());
+			document.getElementById("value").innerText = returnValue();
 		}
 	}
 

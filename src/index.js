@@ -86,7 +86,7 @@
 	let grooveClick = false;
 	let mousePosimem = 0;
 
-	grooveElm.onmousedown=(e)=>{
+	grooveElm.onmousedown = (e) => {
 		console.log(e.offsetX);
 		const posi = (rotateFlg) ? e.offsetY : e.offsetX;
 		knobElm.style.left = (posi) + "px";

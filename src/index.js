@@ -37,6 +37,9 @@
 	knobElm.style.left = ((maxValue) * Math.min(1, (value / (max - min)))) + minValue + "px";
 	grooveBeforeElm.style.width = returnCssValue(kEl.left, "px") + "px";
 
+	gfwidth = returnCssValue(gfEl.width, "px");
+	kwidth = returnCssValue(kEl.width, "px");
+
 	//mouse over
 	const defBgColor = knobElm.style.backgroundColor;
 	const defGrooveColor = grooveElm.style.backgroundColor;
@@ -83,14 +86,24 @@
 	let grooveClick = false;
 	let mousePosimem = 0;
 
+	grooveElm.onmousedown=(e)=>{
+		console.log(e.offsetX);
+		const posi = (rotateFlg) ? e.offsetY : e.offsetX;
+		knobElm.style.left = (posi) + "px";
+		grooveBeforeElm.style.width = returnCssValue(kEl.left, "px") + "px";
+		grooveClick = true;
+		colorClick();
+		knobLeft = gfwidth;
+		//return value
+		document.getElementById("value").innerText = returnValue();
+	}
+
 	knobElm.onmousedown = (e) => {
 		grooveClick = true;
 		mousePosimem = (rotateFlg) ? e.clientY : e.clientX;
 		colorClick();
 	}
 
-	gfwidth = returnCssValue(gfEl.width, "px");
-	kwidth = returnCssValue(kEl.width, "px");
 	let knobLeft = gfwidth;
 	window.onmousemove = (e) => {
 		if (grooveClick) {
